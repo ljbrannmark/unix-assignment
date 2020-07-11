@@ -1,10 +1,13 @@
 #!/usr/bin/env bash
 # File: guessinggame.sh
 
-n=$(ls -al | grep ^[^d] | wc -l)
+n=$(ls -A1 | wc -l)
 
 function compare {
-  if [[ $1 -gt $2 ]]
+  if [[ $1 =~ [^0-9] ]] || [[ $2 =~ [^0-9] ]]
+  then
+    echo "Only nonnegative integers are allowed, try again:"
+  elif [[ $1 -gt $2 ]]
   then
     echo "Too high, try again:"
   elif [[ $1 -lt $2 ]]
